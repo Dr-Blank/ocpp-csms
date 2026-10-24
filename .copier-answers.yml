@@ -1,0 +1,16 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v1.4.0
+_src_path: https://github.com/Dr-Blank/ha-integration-ci
+description: asyncio OCPP 1.6J central system for local control of EV chargers
+license: AGPL-3.0-or-later
+mypy_untyped_modules:
+- ocpp.*
+package: ocpp_csms
+project_type: library
+pylint: true
+python_versions:
+- '3.11'
+- '3.12'
+- '3.13'
+- '3.14'
+repo_name: ocpp-csms
