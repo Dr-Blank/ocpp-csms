@@ -521,6 +521,28 @@ async def test_payloads_stay_out_of_info_logs(
     )
 
 
+@pytest.mark.parametrize(
+    ("logger", "logged"),
+    [
+        pytest.param("ocpp_csms", False, id="package-debug"),
+        pytest.param("ocpp_csms.wire", True, id="wire-debug"),
+    ],
+)
+async def test_wire_logging_must_be_asked_for_by_name(
+    central_system: CentralSystem,
+    connect: Connect,
+    caplog: pytest.LogCaptureFixture,
+    logger: str,
+    logged: bool,
+) -> None:
+    caplog.set_level(logging.DEBUG, logger=logger)
+    fake = await connect(central_system)
+
+    await fake.call(call.DataTransfer(vendor_id="Nobody", data="secret-value"))
+
+    assert ("secret-value" in caplog.text) is logged
+
+
 async def test_payloads_stay_out_of_error_logs(
     central_system: CentralSystem,
     connect: Connect,

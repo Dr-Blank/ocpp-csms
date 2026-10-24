@@ -168,7 +168,7 @@ State lives in memory. A charger reconnecting to a restarted central system usua
 
 ## Logging
 
-The `ocpp_csms` logger records charge point ids and message names, never payloads, including when a message fails. The `ocpp_csms.wire` logger records every OCPP message, and the details of failures, in full at debug level. Messages carry credentials such as `AuthorizationKey`, so enable it only while debugging and do not share its output unredacted.
+The `ocpp_csms` logger records charge point ids and message names, never payloads, including when a message fails. The `ocpp_csms.wire` logger records every OCPP message, and the details of failures, in full at debug level. It stays off when `ocpp_csms` is set to debug, and must be set to debug by its own name. Messages carry credentials such as `AuthorizationKey` and, from some chargers, the WiFi password, so enable it only while debugging and do not share its output unredacted.
 
 ## Licence
 

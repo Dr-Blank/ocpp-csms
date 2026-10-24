@@ -62,6 +62,10 @@ _LOGGER = logging.getLogger(__package__)
 
 _WIRE_LOGGER = logging.getLogger(f"{__package__}.wire")
 """Logs every OCPP message in full, credentials included. Debug level only."""
+if _WIRE_LOGGER.level == logging.NOTSET:
+    # Debug logging for the package must not switch this on with it: it has
+    # to be asked for by name.
+    _WIRE_LOGGER.setLevel(logging.INFO)
 
 EventListener = Callable[[ChargePointEvent], None]
 """Called with each event. Runs inside message handling, so it must not
